@@ -65,9 +65,7 @@ To avoid updating the API URL every time the backend restarts, set up an ngrok s
 
 #### C. Running and Stopping the Backend
 * **Running:** Execute the notebook cells to initialize the model pipeline, fetch the ngrok secret, and start the background FastAPI server on the GPU instance.
-* **Stopping the Session:** To save your weekly GPU quota when finished, manually stop the active runtime:
-  * Click the **Stop** button / active session status indicator at the top right of the notebook interface.
-  * Alternatively, go to **Run -> Stop session** in the top menu bar to shut down the session completely.
+* **Stopping the Session:** To save your weekly GPU quota when finished, enter the interactive notebook editor by clicking **Edit**, then stop the runtime session via **Run -> Stop session** in the top menu bar.
 
 ---
 
