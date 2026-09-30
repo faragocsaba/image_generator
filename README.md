@@ -49,16 +49,25 @@ To avoid updating the API URL every time the backend restarts, set up an ngrok s
 
 ### 2. Kaggle Backend Setup
 
-#### A. Configure Kaggle Secrets
-1. Open the Kaggle Notebook: [image-generator-backend](https://www.kaggle.com/code/csabafarago/image-generator-backend/).
-2. In the top menu, go to **Add-ons -> Secrets**.
-3. Add a new secret:
+#### A. Create and Configure the Notebook
+1. Go to Kaggle and create a new Notebook.
+2. In the right-side **Settings** panel, configure the following:
+   * **Accelerator:** Select **GPU T4 x2** (or GPU T4).
+   * **Internet:** Ensure internet access is toggled **ON** (required for the ngrok tunnel to connect).
+3. Title your notebook accordingly (e.g., `image-generator-backend`).
+
+#### B. Configure Kaggle Secrets
+1. In the top menu of your notebook, go to **Add-ons -> Secrets**.
+2. Add a new secret:
    * **Label:** `NGROK_TOKEN`
    * **Value:** *(Paste your ngrok Authtoken)*
-4. Enable the checkbox to attach the secret to the notebook.
+3. Enable the checkbox to attach the secret to the notebook.
 
-#### B. Running the Backend
-Execute the notebook cells in [csabafarago/image-generator-backend](https://www.kaggle.com/code/csabafarago/image-generator-backend/) to initialize the model pipeline, fetch the ngrok secret, and start the background FastAPI server on the GPU instance.
+#### C. Running and Stopping the Backend
+* **Running:** Execute the notebook cells to initialize the model pipeline, fetch the ngrok secret, and start the background FastAPI server on the GPU instance.
+* **Stopping the Session:** To save your weekly GPU quota when finished, manually stop the active runtime:
+  * Click the **Stop** button / active session status indicator at the top right of the notebook interface.
+  * Alternatively, go to **Run -> Stop session** in the top menu bar to shut down the session completely.
 
 ---
 
