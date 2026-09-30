@@ -37,7 +37,7 @@ if st.button("🚀 Generate Image", type="primary", use_container_width=True):
                     image = Image.open(BytesIO(response.content))
                     
                     st.success(" Image generated successfully!")
-                    st.image(image, caption=f"Generated: '{prompt}'", use_column_width=True)
+                    st.image(image, caption=f"Generated: '{prompt}'", use_container_width=True)
                     
                     # Download button
                     img_byte_arr = BytesIO()
