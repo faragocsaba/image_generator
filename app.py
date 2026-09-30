@@ -9,7 +9,7 @@ st.title("🎨 AI Image Generator Web App")
 st.info("🔗 **Backend Notebook** must be active: [csabafarago/image-generator-backend](https://www.kaggle.com/code/csabafarago/image-generator-backend)")
 
 prompt = st.text_area(
-    "2. Describe the image to generate:", 
+    "Describe the image to generate:", 
     value="A majestic dragon flying over a glowing futuristic city, cinematic lighting, 8k",
     height=100
 )
