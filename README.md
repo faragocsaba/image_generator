@@ -1,4 +1,3 @@
-cat << 'EOF' > README.md
 # 🎨 SDXL Turbo Image Generator
 
 A full-stack Generative AI web application that produces images from text prompts in real time. The project uses a decoupled microservice architecture: a **Streamlit** frontend hosted on Streamlit Cloud communicates via a **FastAPI / ngrok** tunnel with a **Google Colab / Kaggle T4 GPU** backend executing the **Stable Diffusion XL Turbo** model.
@@ -20,16 +19,16 @@ A full-stack Generative AI web application that produces images from text prompt
 ## 🏗️ Architecture Overview
 
 ```
-┌─────────────────────────┐         REST API         ┌─────────────────────────┐
-│   Streamlit Frontend    │ ───────────────────────> │      ngrok Tunnel       │
+┌────────────────────────-─┐         REST API         ┌─────────────────────────┐
+│   Streamlit Frontend     │ ───────────────────────> │      ngrok Tunnel       │
 │ (Streamlit Cloud / Local)│ <─────────────────────── │ (Static Domain Routing) │
-└─────────────────────────┘         PNG Bytes        └────────────┬────────────┘
-                                                                  │
-                                                                  ▼
-                                                     ┌─────────────────────────┐
-                                                     │    Kaggle GPU Backend   │
-                                                     │  (FastAPI + SDXL Turbo) │
-                                                     └─────────────────────────┘
+└────────────────────────-─┘         PNG Bytes        └────────────┬────────────┘
+                                                                   │
+                                                                   ▼
+                                                      ┌─────────────────────────┐
+                                                      │    Kaggle GPU Backend   │
+                                                      │  (FastAPI + SDXL Turbo) │
+                                                      └─────────────────────────┘
 ```
 
 1. **Frontend:** Users input prompt descriptions into the Streamlit interface.
