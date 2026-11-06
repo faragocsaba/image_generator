@@ -5,12 +5,12 @@ from PIL import Image
 
 # Page configuration
 st.set_page_config(page_title="AI Image Generator Bridge", page_icon="🎨", layout="centered")
-st.title("🎨 AI Image Generator Web App")
+st.title("🎨 Csaba Style Image Generator Web App")
 st.info("🔗 **Backend Notebook** must be active: [csabafarago/image-generator-backend](https://www.kaggle.com/code/csabafarago/image-generator-backend)")
 
 prompt = st.text_area(
     "Describe the image to generate:", 
-    value="A majestic dragon flying over a glowing futuristic city, cinematic lighting, 8k",
+    value="dragon",
     height=100
 )
 
@@ -22,7 +22,7 @@ if st.button("🚀 Generate Image", type="primary", use_container_width=True):
             try:
                 # Header required by ngrok free tier to skip warning page
                 headers = {"ngrok-skip-browser-warning": "true"}
-                params = {"prompt": prompt}
+                params = {"prompt": prompt + " in csaba style"}
                 
                 # API request to Colab
                 response = requests.get(
