@@ -5,7 +5,7 @@ from PIL import Image
 
 # Page configuration
 st.set_page_config(page_title="AI Image Generator Bridge", page_icon="🎨", layout="centered")
-st.title("🎨 Csaba Style Image Generator Web App")
+st.title("🎨 Csaba Style Image Generator")
 st.info("🔗 **Backend Notebook** must be active: [csabafarago/image-generator-backend](https://www.kaggle.com/code/csabafarago/image-generator-backend)")
 
 prompt = st.text_area(
