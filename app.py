@@ -45,7 +45,7 @@ if st.button("🚀 Generate Image", type="primary", use_container_width=True):
                     st.download_button(
                         label="💾 Download Image (PNG)",
                         data=img_byte_arr.getvalue(),
-                        file_name="ai_generated_image.png",
+                        file_name=prompt+".png",
                         mime="image/png"
                     )
                 else:
