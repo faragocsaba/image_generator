@@ -41,12 +41,12 @@ if st.button("🚀 Generate Image", type="primary", use_container_width=True):
                     
                     # Download button
                     img_byte_arr = BytesIO()
-                    image.save(img_byte_arr, format='PNG')
+                    image.save(img_byte_arr, format='JPG')
                     st.download_button(
-                        label="💾 Download Image (PNG)",
+                        label="💾 Download Image (JPG)",
                         data=img_byte_arr.getvalue(),
-                        file_name=prompt+".png",
-                        mime="image/png"
+                        file_name=prompt+".jpg",
+                        mime="image/jpg"
                     )
                 else:
                     st.error(f" Server error occurred! Status code: {response.status_code}")
