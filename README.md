@@ -46,10 +46,11 @@ The project has been unified under the **`faragocsaba/image_generator`** reposit
 
 ```text
 image_generator/
-├── app.py                      # Streamlit frontend (stílusválasztóval / Csaba Stílus kapcsolóval)
-├── image-generator-backend.py  # FastAPI backend (Kaggle/Colab futtatáshoz, SDXL Base + LoRA betöltéssel)
-├── requirements.txt            # Függőségek (Streamlit, FastAPI, Diffusers, PyTorch, stb.)
-└── README.md                   # Frissített, egységesített dokumentáció
+├── app.py                      # Streamlit frontend (with style selector / Csaba Style switch)
+├── image-generator-backend.py  # FastAPI backend (for Kaggle/Colab execution with SDXL Base + LoRA loading)
+├── image_generator.ipynb       # Google Colab code notebook (executed)
+├── requirements.txt            # Dependencies (Streamlit, FastAPI, Diffusers, PyTorch, etc.)
+└── README.md                   # Updated, unified project documentation
 ```
 
 ---
