@@ -20,19 +20,7 @@ A full-stack Generative AI web application combining a **Streamlit** frontend, a
 
 ## 🏗️ Architecture Overview
 
-```text
-┌──────────────────────────┐        REST API          ┌─────────────────────────┐
-│   Streamlit Frontend     │ ───────────────────────> │      ngrok Tunnel       │
-│ (Streamlit Cloud / Local)│ <─────────────────────── │ (Static Domain Routing) │
-└──────────────────────────┘        PNG Bytes         └────────────┬────────────┘
-                                                               │
-                                                               ▼
-                                                      ┌─────────────────────────┐
-                                                      │   GPU Backend (Kaggle)  │
-                                                      │  (FastAPI + SDXL Base   │
-                                                      │   + Csaba Style LoRA)   │
-                                                      └─────────────────────────┘
-```
+![Architecture Overview](architecture.svg)
 
 1. **Frontend:** Users input prompt descriptions and select generation parameters via the Streamlit interface.
 2. **Tunneling:** Requests are routed through a static ngrok domain (`.ngrok-free.dev`) directly to the backend.
@@ -46,86 +34,9 @@ The project has been unified under the **`faragocsaba/image_generator`** reposit
 
 ```text
 image_generator/
-├── app.py                      # Streamlit frontend (with style selector / Csaba Style switch)
-├── image-generator-backend.py  # FastAPI backend (for Kaggle/Colab execution with SDXL Base + LoRA loading)
+├── app.py                      # Streamlit frontend
+├── image-generator-backend.py  # FastAPI backend for Kaggle execution
 ├── image_generator.ipynb       # Google Colab code notebook (executed)
-├── requirements.txt            # Dependencies (Streamlit, FastAPI, Diffusers, PyTorch, etc.)
-└── README.md                   # Updated, unified project documentation
+├── requirements.txt            # Dependencies
+└── README.md                   # Project documentation
 ```
-
----
-
-## 🛠️ Step-by-Step Setup & Deployment Guide
-
-### 1. ngrok Configuration (Static Domain)
-To avoid updating the API URL every time the backend restarts, set up an ngrok static domain:
-1. Create a free account at [ngrok.com](https://ngrok.com).
-2. Retrieve your **Authtoken** under `Dashboard -> Your Authtoken`.
-3. Locate your default free static dev domain under `Gateway -> Domains` (e.g., `abreast-calm-refining.ngrok-free.dev`).
-
----
-
-### 2. Backend Setup (Kaggle / Google Colab)
-
-#### A. Configure GPU Accelerator
-1. Open your Kaggle Notebook or Google Colab instance.
-2. Set the runtime accelerator to **GPU T4** (or T4 x2).
-3. Ensure internet access is enabled.
-
-#### B. Configure Secrets (Kaggle Secrets / Colab User Data)
-1. Add your `NGROK_TOKEN` as a secret or environment variable.
-2. Ensure Hugging Face permissions are available if private models are used.
-
-#### C. Backend Inference Code Snippet
-The backend initializes the pipeline by loading the base model and attaching the custom LoRA weights:
-
-```python
-import torch
-from diffusers import AutoPipelineForText2Image
-
-# 1. Load SDXL Base 1.0
-pipe = AutoPipelineForText2Image.from_pretrained(
-    "stabilityai/stable-diffusion-xl-base-1.0", 
-    torch_dtype=torch.float16
-).to("cuda")
-
-# 2. Load custom LoRA weights directly from Hugging Face Hub
-pipe.load_lora_weights("fcsaba/csaba-style-sdxl-lora")
-```
-
----
-
-### 3. Local Streamlit Development
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/faragocsaba/image_generator.git
-   cd image_generator
-   ```
-
-2. **Install Dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Run the Streamlit App:**
-   ```bash
-   streamlit run app.py
-   ```
-
----
-
-### 4. Streamlit Cloud Deployment
-
-1. Push your project files (`app.py`, `image-generator-backend.py`, `requirements.txt`, and `README.md`) to your GitHub repository: [faragocsaba/image_generator](https://github.com/faragocsaba/image_generator).
-2. Log in to [share.streamlit.io](https://share.streamlit.io) using your GitHub account.
-3. Configure the app with main file path `app.py` and deploy.
-
----
-
-## 🧰 Tech Stack
-
-- **Frontend:** Streamlit, Python, Pillow
-- **Backend Framework:** FastAPI, Uvicorn, Python `threading`
-- **AI/ML Model:** Stable Diffusion XL Base 1.0 (`stabilityai/stable-diffusion-xl-base-1.0`) + LoRA (`fcsaba/csaba-style-sdxl-lora`) via Hugging Face `diffusers` & PyTorch
-- **Infrastructure & Tunneling:** Kaggle/Colab Notebooks (Nvidia T4 GPU), ngrok, Streamlit Community Cloud
