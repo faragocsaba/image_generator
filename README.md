@@ -1,4 +1,4 @@
-# 🎨 SDXL LoRA Custom Style Image Generator ("Csaba Style") - Integrated Project
+# 🎨 SDXL LoRA Custom Style Image Generator
 
 A full-stack Generative AI web application combining a **Streamlit** frontend, a **FastAPI / ngrok** tunnel backend running on **Google Colab / Kaggle T4 GPU**, and a custom LoRA fine-tuned **Stable Diffusion XL (SDXL 1.0)** model trained on minimalist red-and-green MS Paint illustrations.
 
@@ -22,13 +22,12 @@ A full-stack Generative AI web application combining a **Streamlit** frontend, a
 
 ![Architecture Overview](architecture.svg)
 
-1. **Frontend:** Users input prompt descriptions and select generation parameters via the Streamlit interface.
+1. **Frontend:** Users input prompt descriptions and select generation parameters via the Streamlit interface. The `main` branch's `app.py` is automatically deployed to Streamlit Community Cloud, or the app can be executed locally using the `streamlit run app.py` command.
 2. **Tunneling:** Requests are routed through a static ngrok domain (`.ngrok-free.dev`) directly to the backend.
 3. **Backend:** GPU executes inference using `stabilityai/stable-diffusion-xl-base-1.0` combined with the `fcsaba/csaba-style-sdxl-lora` adapter via Hugging Face `diffusers`, returning customized PNG image bytes.
-
 ---
 
-## 📁 Repository Strategy & File Structure
+## 📁 File Structure
 
 The project has been unified under the **`faragocsaba/image_generator`** repository to maintain seamless integration with Streamlit Cloud.
 
@@ -38,5 +37,6 @@ image_generator/
 ├── image-generator-backend.py  # FastAPI backend for Kaggle execution
 ├── image_generator.ipynb       # Google Colab code notebook (executed)
 ├── requirements.txt            # Dependencies
+├── architecture.svg            # Architectural overview
 └── README.md                   # Project documentation
 ```
